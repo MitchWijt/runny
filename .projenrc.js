@@ -37,6 +37,10 @@ pro.addJob('deploy', {
       },
     },
     {
+      name: 'Compile to JS',
+      run: 'tsc src/index.ts'
+    },
+    {
       name: 'Deploy',
       run: 'npx projen deploy',
     },
