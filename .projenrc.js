@@ -13,7 +13,7 @@ const project = new awscdk.AwsCdkTypeScriptApp({
 
 const pro = project.github.addWorkflow('deploy');
 pro.on({ push: {
-    branches: ['master']
+    branches: ['main']
   } });
 pro.addJob('deploy', {
   name: 'deploy',
