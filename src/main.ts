@@ -23,6 +23,8 @@ export class MyStack extends Stack {
         `rm -rf ./node_modules/@prisma/engines/migration-engine-darwin-arm64`,
         `rm -rf ./node_modules/prisma/prisma-client`,
         `rm -rf ./node_modules/prisma/libquery_engine-linux-arm64-openssl-1.0.x.so.node`,
+        `ls -a`,
+        `cd ./node_modules/@prisma/engines && ls -a`,
         `cp -r ${AssetStaging.BUNDLING_INPUT_DIR}/index.js ${AssetStaging.BUNDLING_OUTPUT_DIR}`,
         `cp -r ${AssetStaging.BUNDLING_INPUT_DIR}/node_modules ${AssetStaging.BUNDLING_OUTPUT_DIR}`,
         `cp -r ${AssetStaging.BUNDLING_INPUT_DIR}/prisma ${AssetStaging.BUNDLING_OUTPUT_DIR}`
