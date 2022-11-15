@@ -49,19 +49,25 @@ exports.auroraMigrationRunnerHandler = void 0;
 var child_process_1 = require("child_process");
 var path = require("path");
 // import {SecretsManager} from "aws-sdk";
+//
 // interface SecretCredentials {
 //     username: string;
 //     password: string;
 //     dbname: string;
 //     port: string;
 // }
+var counter = 0;
 var auroraMigrationRunnerHandler = function (event) { return __awaiter(void 0, void 0, void 0, function () {
     var command_1, schema, options, fileToExecute_1, commandsToExecuteFileWith_1, err_1;
     var _a;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                _b.trys.push([0, 2, , 3]);
+                counter++;
+                console.log("COUNTER VAL: ".concat(counter));
+                _b.label = 1;
+            case 1:
+                _b.trys.push([1, 3, , 4]);
                 command_1 = (_a = event.command) !== null && _a !== void 0 ? _a : "deploy";
                 schema = event.schema;
                 options = schema ? ["--schema=".concat(schema)] : [];
@@ -69,8 +75,7 @@ var auroraMigrationRunnerHandler = function (event) { return __awaiter(void 0, v
                     // skip confirmation and code generation
                     options = __spreadArray(__spreadArray([], options, true), ["--force", "--skip-generate"], false);
                 }
-                // const connectionUrl = await fetchConnectionUrl();
-                process.env.DATABASE_URL = "test-url";
+                process.env.DATABASE_URL = "test";
                 fileToExecute_1 = path.resolve("./node_modules/prisma/build/index.js");
                 commandsToExecuteFileWith_1 = ["migrate", command_1].concat(options);
                 return [4 /*yield*/, new Promise(function (resolve, _) {
@@ -89,14 +94,14 @@ var auroraMigrationRunnerHandler = function (event) { return __awaiter(void 0, v
                             }
                         });
                     })];
-            case 1: return [2 /*return*/, _b.sent()];
-            case 2:
+            case 2: return [2 /*return*/, _b.sent()];
+            case 3:
                 err_1 = _b.sent();
                 return [2 /*return*/, {
                         success: false,
                         message: err_1.message
                     }];
-            case 3: return [2 /*return*/];
+            case 4: return [2 /*return*/];
         }
     });
 }); };

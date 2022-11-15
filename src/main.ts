@@ -10,22 +10,31 @@ export class MyStack extends Stack {
 
     const now = Date.now().toString();
     const commands = [
-      `cp -r /prisma/ ${AssetStaging.BUNDLING_INPUT_DIR}`,
-      `cp -r /node_modules/ ${AssetStaging.BUNDLING_INPUT_DIR}`,
-      "./node_modules/prisma/build/index.js generate",
-      `rm -rf ./node_modules/@prisma/engines`,
-      `cp -r ${AssetStaging.BUNDLING_INPUT_DIR}/index.js ${AssetStaging.BUNDLING_OUTPUT_DIR}`,
-      `cp -r ${AssetStaging.BUNDLING_INPUT_DIR}/node_modules ${AssetStaging.BUNDLING_OUTPUT_DIR}`,
-      `cp -r ${AssetStaging.BUNDLING_INPUT_DIR}/prisma ${AssetStaging.BUNDLING_OUTPUT_DIR}`,
+        `cp -r /prisma/ ${AssetStaging.BUNDLING_INPUT_DIR}`,
+        `cp -r /node_modules/ ${AssetStaging.BUNDLING_INPUT_DIR}`,
+        "./node_modules/prisma/build/index.js generate",
+        `rm -rf ./node_modules/.prisma`,
+        `rm -rf ./node_modules/@prisma/engines/libquery_engine-darwin-arm64.dylib.node`,
+        `rm -rf ./node_modules/@prisma/engines/libquery_engine-linux-arm64-openssl-1.0.x.so.node`,
+        `rm -rf ./node_modules/@prisma/engines/introspection-engine-darwin-arm64`,
+        `rm -rf ./node_modules/@prisma/engines/introspection-engine-linux-arm64-openssl-1.0.x`,
+        `rm -rf ./node_modules/@prisma/engines/prisma-fmt-darwin-arm64`,
+        `rm -rf ./node_modules/@prisma/engines/prisma-fmt-linux-arm64-openssl-1.0.x`,
+        `rm -rf ./node_modules/@prisma/engines/migration-engine-darwin-arm64`,
+        `rm -rf ./node_modules/prisma/prisma-client`,
+        `rm -rf ./node_modules/prisma/libquery_engine-linux-arm64-openssl-1.0.x.so.node`,
+        `cp -r ${AssetStaging.BUNDLING_INPUT_DIR}/index.js ${AssetStaging.BUNDLING_OUTPUT_DIR}`,
+        `cp -r ${AssetStaging.BUNDLING_INPUT_DIR}/node_modules ${AssetStaging.BUNDLING_OUTPUT_DIR}`,
+        `cp -r ${AssetStaging.BUNDLING_INPUT_DIR}/prisma ${AssetStaging.BUNDLING_OUTPUT_DIR}`
     ].join(" && ");
 
     const migrationRunnerCode = Code.fromAsset(path.join(__dirname), {
       bundling: {
         image: Runtime.NODEJS_14_X.bundlingImage,
         volumes: [
-          { hostPath: path.join(__dirname, "/myApp/prisma"), containerPath: "/prisma" },
-          { hostPath: path.join(process.cwd(), 'node_modules', 'prisma'), containerPath: "/node_modules/prisma" },
-          { hostPath: path.join(process.cwd(), 'node_modules', '@prisma'), containerPath: "/node_modules/@prisma" },
+            { hostPath: path.join(__dirname, "/myApp/prisma"), containerPath: "/prisma" },
+            { hostPath: path.join(process.cwd(), 'node_modules', 'prisma'), containerPath: "/node_modules/prisma" },
+            { hostPath: path.join(process.cwd(), 'nody_modules', '@prisma'), containerPath: "/node_modules/@prisma" },
         ],
         command: ["bash", "-c", commands],
       },
@@ -42,7 +51,7 @@ export class MyStack extends Stack {
           functionName: `migrationRunner-${now}`,
           runtime: Runtime.NODEJS_14_X,
           timeout: Duration.minutes(1),
-          memorySize: 512
+          memorySize: 512,
         }
     );
   }

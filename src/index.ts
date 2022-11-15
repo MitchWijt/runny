@@ -1,7 +1,7 @@
-import {execFile} from "child_process";
-import * as path from "path";
+import { execFile } from 'child_process';
+import * as path from 'path';
 // import {SecretsManager} from "aws-sdk";
-
+//
 // interface SecretCredentials {
 //     username: string;
 //     password: string;
@@ -9,7 +9,13 @@ import * as path from "path";
 //     port: string;
 // }
 
+let counter = 0;
+
 export const auroraMigrationRunnerHandler = async (event: any) => {
+
+    counter++
+
+    console.log(`COUNTER VAL: ${counter}`)
 
     try {
         // Available commands are:
@@ -26,12 +32,12 @@ export const auroraMigrationRunnerHandler = async (event: any) => {
             options = [...options, "--force", "--skip-generate"];
         }
 
-        // const connectionUrl = await fetchConnectionUrl();
-        process.env.DATABASE_URL = "test-url";
+        process.env.DATABASE_URL = "test";
 
         // Currently we don't have any direct method to invoke prisma migration programmatically.
         // As a workaround, we spawn migration script as a child process and wait for its completion.
         // Please also refer to the following GitHub issue: https://github.com/prisma/prisma/issues/4703
+
         const fileToExecute = path.resolve("./node_modules/prisma/build/index.js")
         const commandsToExecuteFileWith = ["migrate", command].concat(options)
 
