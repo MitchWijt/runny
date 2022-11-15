@@ -21,6 +21,7 @@ export class MyStack extends Stack {
         `rm -rf ./node_modules/@prisma/engines/migration-engine-debian-openssl-1.1.x`,
         `rm -rf ./node_modules/prisma/prisma-client`,
         `rm -rf ./node_modules/prisma/libquery_engine-linux-arm64-openssl-1.0.x.so.node`,
+        `cd ./node_modules/@prisma/engines && ls -a`,
         `cp -r ${AssetStaging.BUNDLING_INPUT_DIR}/index.js ${AssetStaging.BUNDLING_OUTPUT_DIR}`,
         `cp -r ${AssetStaging.BUNDLING_INPUT_DIR}/node_modules ${AssetStaging.BUNDLING_OUTPUT_DIR}`,
         `cp -r ${AssetStaging.BUNDLING_INPUT_DIR}/prisma ${AssetStaging.BUNDLING_OUTPUT_DIR}`
