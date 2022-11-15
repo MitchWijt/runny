@@ -34,7 +34,7 @@ export class MyStack extends Stack {
         volumes: [
             { hostPath: path.join(__dirname, "/myApp/prisma"), containerPath: "/prisma" },
             { hostPath: path.join(process.cwd(), 'node_modules', 'prisma'), containerPath: "/node_modules/prisma" },
-            { hostPath: path.join(process.cwd(), 'nody_modules', '@prisma'), containerPath: "/node_modules/@prisma" },
+            { hostPath: path.join(process.cwd(), 'node_modules', '@prisma'), containerPath: "/node_modules/@prisma" },
         ],
         command: ["bash", "-c", commands],
       },
